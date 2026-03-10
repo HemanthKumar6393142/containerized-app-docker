@@ -125,7 +125,7 @@ http://EC2-PUBLIC-IP
 
 ### Application Running
 
-![Application Running](screenshots/application-running.png)
+![Application Running](screenshots/app-running.png)
 
 ### Docker Hub Repository
 
