@@ -1,33 +1,45 @@
-# Containerized Application Deployment with Automated CI/CD
+# Automated Containerized Application Deployment using Docker & CI/CD
 
-## Project Overview
+## 📌 Project Overview
 
-This project demonstrates how to containerize an application using Docker and automate its build and deployment using GitHub Actions. The pipeline builds the Docker image, pushes it to Docker Hub, and automatically deploys the updated container to an AWS EC2 instance.
+Modern applications require consistent deployment environments and automated delivery mechanisms to ensure reliability and scalability.
+This project demonstrates a containerized application deployment pipeline using Docker, GitHub Actions, Docker Hub, and AWS EC2.
 
-The objective is to ensure consistent application environments and enable automated deployments using DevOps best practices.
-
----
-
-## Problem Statement
-
-Applications often fail to run consistently across different environments due to differences in system configurations, dependencies, and runtime versions.
+The solution simulates a real-world DevOps CI/CD workflow where application changes automatically trigger container build and deployment processes.
 
 ---
 
-## Solution
+## 🎯 Problem Statement
 
-Docker is used to package the application and its dependencies into a container image.
-A CI/CD pipeline using GitHub Actions automatically builds the Docker image, pushes it to Docker Hub, and deploys it to an AWS EC2 server.
+In traditional deployment environments:
+
+* Applications fail due to dependency and environment mismatches
+* Manual deployments increase operational risk
+* Deployment processes are time-consuming and error-prone
+* Lack of automation reduces deployment efficiency
+* Scaling and updating applications becomes complex
 
 ---
 
-## Architecture
+## ✅ Solution
 
-Developer → GitHub Repository → GitHub Actions → Docker Hub → AWS EC2 → Running Container → Application Access
+Designed and implemented an automated container deployment pipeline that:
+
+* Containerizes the application using Docker
+* Automates image build and publishing via GitHub Actions
+* Stores container images in Docker Hub registry
+* Deploys updated containers automatically to AWS EC2
+* Ensures consistent runtime environment across deployments
 
 ---
 
-## Technologies Used
+## 🏗️ Architecture
+
+![Architecture](docs/architecture/architecture.png)
+
+---
+
+## ⚙️ Tech Stack
 
 * Docker
 * GitHub
@@ -39,113 +51,93 @@ Developer → GitHub Repository → GitHub Actions → Docker Hub → AWS EC2 �
 
 ---
 
-## Project Structure
+## 🚀 Implementation Steps
 
-containerized-app-docker
-│
-├── app
-│   ├── app.js
-│   └── package.json
-│
-├── docker
-│   └── Dockerfile
-│
-├── .github
-│   └── workflows
-│       └── deploy.yml
-│
-├── docs
-│   └── architecture.md
-│
-├── screenshots
-│   ├── docker-build.png
-│   ├── container-running.png
-│   ├── application-running.png
-│   └── dockerhub-image.png
-│
-├── .gitignore
-└── README.md
+### 1. Application Containerization
 
----
+* Developed a simple Node.js application
+* Created Dockerfile to package application with dependencies
+* Built and tested Docker container locally
 
-## CI/CD Pipeline Workflow
+### 2. Source Code Management
 
-1. Developer pushes application code to GitHub.
-2. GitHub Actions pipeline is triggered.
-3. The Docker image is built using the Dockerfile.
-4. The image is pushed to Docker Hub.
-5. GitHub Actions connects to AWS EC2 via SSH.
-6. The EC2 instance pulls the latest Docker image.
-7. The old container is replaced with the updated container.
+* Structured project repository with proper documentation
+* Maintained Docker configuration and CI/CD workflows in GitHub
+
+### 3. CI Pipeline Automation
+
+* Configured GitHub Actions workflow triggered on code push
+* Automated Docker image build process
+* Implemented secure Docker Hub authentication using GitHub Secrets
+
+### 4. Image Registry Integration
+
+* Tagged and pushed Docker images to Docker Hub
+* Enabled version-controlled image storage and distribution
+
+### 5. Automated Deployment to AWS
+
+* Configured SSH-based deployment from GitHub Actions
+* Pulled latest Docker image on EC2 server
+* Replaced existing container with updated container version
+
+### 6. Continuous Delivery Workflow
+
+* Enabled seamless application updates via CI/CD pipeline
+* Ensured minimal manual intervention in deployment lifecycle
 
 ---
 
-## Docker Build and Run (Local Development)
-
-Build Docker image:
-
-docker build -t docker-node-app -f docker/Dockerfile .
-
-Run container:
-
-docker run -d -p 3000:3000 docker-node-app
-
-Access application:
-
-http://localhost:3000
-
----
-
-## Deployment on AWS EC2
-
-The CI/CD pipeline automatically deploys the latest container using the following steps:
-
-docker pull <dockerhub-username>/docker-node-app:latest
-docker stop docker-app || true
-docker rm docker-app || true
-docker run -d -p 80:3000 --name docker-app <dockerhub-username>/docker-node-app:latest
-
-After deployment the application becomes accessible via the EC2 public IP.
-
-Example:
-
-http://EC2-PUBLIC-IP
-
----
-
-## Screenshots
+## 📸 Project Screenshots
 
 ### Docker Image Build
 
-![Docker Build](screenshots/docker-build.png)
+![Docker Build](docs/screenshots/docker-build.png)
 
 ### Running Container
 
-![Container Running](screenshots/container-running.png)
+![Container Running](docs/screenshots/container-running.png)
 
-### Application Running
+### Application Output
 
-![Application Running](screenshots/app-running.png)
+![Application Running](docs/screenshots/app-running.png)
 
 ### Docker Hub Repository
 
-![Docker Hub](screenshots/dockerhub-image.png)
+![Docker Hub](docs/screenshots/dockerhub-image.png)
+
+### GitHub Actions Pipeline
+
+![Pipeline](docs/screenshots/github-actions-success.png)
+
+### EC2 Deployment
+
+![EC2 Deployment](docs/screenshots/ec2-deployment.png)
 
 ---
 
-## Key Outcomes
+## 🎯 Key Learnings
 
-* Containerized application using Docker
-* Automated CI/CD pipeline using GitHub Actions
-* Image storage using Docker Hub
-* Automated deployment to AWS EC2
-* Consistent application runtime environment
+* Containerization using Docker
+* CI/CD pipeline design using GitHub Actions
+* Secure secrets management in GitHub environments
+* Automated container deployment strategies
+* Container image lifecycle management
+* DevOps deployment automation practices
 
 ---
 
-## Future Improvements
+## 🔮 Future Improvements
 
-* Implement Docker image versioning
-* Add multi-stage Docker builds
-* Integrate monitoring tools
+* Implement Docker image versioning strategy
+* Add multi-stage Docker builds for optimization
+* Integrate monitoring and logging solutions
+* Implement blue-green or rolling deployments
 * Deploy using Kubernetes for container orchestration
+* Add Infrastructure as Code for environment provisioning
+
+---
+
+## 👨‍💻 Author
+
+Hemanth Kumar
